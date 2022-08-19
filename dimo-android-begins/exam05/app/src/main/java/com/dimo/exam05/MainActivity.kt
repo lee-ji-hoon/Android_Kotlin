@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.*
 import org.w3c.dom.Text
 
+// CompoundButton.OnCheckedChangeListener 인터페이스를 구현함으로써 두 개의 버튼 하나의 함수에서 처리 가능
 class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("checkbox", "메인 시작")
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
         }
     }
 
+    // CompoundButton.OnCheckedChangeListener 추상 메소드
     override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
         Log.d("checkbox", "체크박스 시작")
         var option = 0
@@ -38,9 +40,9 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
         val boldOption = findViewById<CheckBox>(R.id.checkbox_bold)
         val italicOption = findViewById<CheckBox>(R.id.checkbox_italic)
 
-        if (boldOption.isChecked) option += Typeface.BOLD
-        if (italicOption.isChecked) option += Typeface.ITALIC
+        if (boldOption.isChecked) option += Typeface.BOLD // 비트 연산 이용
+        if (italicOption.isChecked) option += Typeface.ITALIC // // 비트 연산 이용
 
-        text.setTypeface(null, option)
+        text.setTypeface(null, option) // 비트연산해서 합쳐진 값을 넣으면 둘 다 적용 혹은 둘 다 적용x, 하나만 적용이 된다.
     }
 }
