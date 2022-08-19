@@ -26,3 +26,5 @@ replay_pid*
 /practice
 
 /.idea
+
+.DS_Store
