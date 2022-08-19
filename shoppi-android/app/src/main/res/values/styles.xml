@@ -30,7 +30,7 @@
         <item name="android:textColor">@color/shoppi_black_01</item>
     </style>
 
-    <style name="TextSubtitle2.Grey05" parent="TextAppearance.MaterialComponents.Subtitle2">
+    <style name="TextSubtitle2.Grey05">
         <item name="android:textColor">@color/shoppi_grey_05</item>
     </style>
 
@@ -48,7 +48,7 @@
         <item name="android:textColor">@color/shoppi_black_01</item>
     </style>
 
-    <style name="TextCaption1.Grey03" parent="TextAppearance.AppCompat.Caption">
+    <style name="TextCaption1.Grey03">
         <item name="android:textColor">@color/shoppi_grey_03</item>
     </style>
 
