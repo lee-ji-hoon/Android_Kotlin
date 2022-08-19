@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">exam06</string>
+    <string name="greeting_text">%1s님 환영합니다.</string>
+</resources>
