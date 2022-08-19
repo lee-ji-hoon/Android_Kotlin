@@ -9,6 +9,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1940222897669706" />
+        <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.35054347826086957" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19814814814814816" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19814814814814816" />
       </map>
     </option>
   </component>
