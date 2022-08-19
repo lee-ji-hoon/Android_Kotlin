@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                // with 이용해보기!
                 with(productArray[position]) {
                     priceText.text = getString(R.string.price_name, name, price)
                 }

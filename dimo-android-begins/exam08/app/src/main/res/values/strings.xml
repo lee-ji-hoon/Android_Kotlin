@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">exam08</string>
+    <string name="number_text">%1$d를 선택했습니다.</string>
+</resources>
