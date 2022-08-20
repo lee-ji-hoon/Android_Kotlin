@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">exam09</string>
+    <string name="price_text">%2d원</string>
+</resources>
