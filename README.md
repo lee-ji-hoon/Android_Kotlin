@@ -7,4 +7,4 @@
 ## 서적
 |이름|기간|링크|완료여부|
 |---|---|---|---|
-|실무에 바로 적용하는 안드로이드 프로그래밍 - 제4판|2022.08.21 ~ 진행중  |[레포지토리](https://github.com/lee-ji-hoon/android-kotlin/tree/main/the-big-nerd-ranch-guide-4nd)[서적](https://www.aladin.co.kr/shop/wproduct.aspx?start=short&ItemId=266698196)|진행중|
+|실무에 바로 적용하는 안드로이드 프로그래밍 - 제4판|2022.08.21 ~ 진행중  |[레포지토리](https://github.com/lee-ji-hoon/android-kotlin/tree/main/the-big-nerd-ranch-guide-4nd) / [서적](https://www.aladin.co.kr/shop/wproduct.aspx?start=short&ItemId=266698196)|진행중|
