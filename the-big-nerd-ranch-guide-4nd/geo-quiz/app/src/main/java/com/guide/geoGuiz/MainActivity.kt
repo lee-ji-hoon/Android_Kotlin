@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val btnTrue = mainBinding.btnTrue
         val btnFalse = mainBinding.btnFalse
         val btnNext = mainBinding.btnNext
+        val btnPrev = mainBinding.btnPrevious
         val tvQuestion = mainBinding.tvQuestion
 
         updateQuestion(tvQuestion)
@@ -51,6 +52,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 챌린지 2. PREVIOUS 버튼 추가
+        btnPrev.setOnClickListener {
+            updatePrevQuestion(tvQuestion)
+        }
+    }
+
+    private fun updatePrevQuestion(tvQuestion: TextView) {
+        if (currentIndex > 0) {
+            currentIndex -= 1
+            Log.d("btn", "이전 질문 버튼 실행 ${currentIndex}")
+            updateQuestion(tvQuestion)
+        }
     }
 
     private fun updateNextQuestion(tvQuestion: TextView) {
