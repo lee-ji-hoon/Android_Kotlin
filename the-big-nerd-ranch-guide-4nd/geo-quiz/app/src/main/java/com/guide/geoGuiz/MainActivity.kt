@@ -24,11 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
-
         val btnTrue = mainBinding.btnTrue
         val btnFalse = mainBinding.btnFalse
         val btnNext = mainBinding.btnNext
         val tvQuestion = mainBinding.tvQuestion
+
+        updateQuestion(tvQuestion)
+
         btnTrue.setOnClickListener {
             Log.d("btn", "true btn 작동")
             checkAnswer(true)
@@ -40,9 +42,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
-            currentIndex = (currentIndex + 1) % questionBank.size
-            updateQuestion(tvQuestion)
+            updateNextQuestion(tvQuestion)
         }
+
+        // 챌린지 1. TextView에 리스너추가
+        tvQuestion.setOnClickListener {
+            updateNextQuestion(tvQuestion)
+        }
+
+        // 챌린지 2. PREVIOUS 버튼 추가
+    }
+
+    private fun updateNextQuestion(tvQuestion: TextView) {
+        currentIndex = (currentIndex + 1) % questionBank.size
         updateQuestion(tvQuestion)
     }
 
