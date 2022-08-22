@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 private const val TAG = "QuizViewModel"
 
 class QuizViewModel : ViewModel() {
-    private var currentIndex = 0
+    var currentIndex = 0
 
     // TODO 모델 데이터를 저장하는 더 좋은 방법이 있지만 우선은 간단하게 List로 생성해서 사용하기
     private val questionBank = listOf(
@@ -28,8 +28,6 @@ class QuizViewModel : ViewModel() {
         get() = questionBank[currentIndex].answer
     val currentQuestionId: Int
         get() = questionBank[currentIndex].textResId
-    val getCurrentIndex
-        get() = currentIndex
     val questionBoxSize
         get() = questionBank.size
     fun moveToLast() { currentIndex = questionBoxSize - 1 }

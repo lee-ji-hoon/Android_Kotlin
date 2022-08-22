@@ -2,16 +2,17 @@ package com.guide.geoGuiz
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.guide.geoGuiz.databinding.ActivityMainBinding
 
+private const val TAG = "MainActivity"
+private const val KEY_INDEX = "index"
+
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding // 컴파일 시점에 초기화 되는 것은 불가능하기 때문에 lateinit
     private val correctQuestions = mutableSetOf<Int>()
-    private val TAG = "MainActivity"
 
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProvider(this)[QuizViewModel::class.java]
@@ -22,7 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
+
+        quizViewModel.currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
         updateQuestion()
+
         mainBinding.btnTrue.setOnClickListener {
             checkAnswer(true)
         }
@@ -61,6 +65,12 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "pause")
     }
 
+    override fun onSaveInstanceState(savedInstacneState: Bundle) {
+        super.onSaveInstanceState(savedInstacneState)
+        Log.d(TAG, "onSaveInstanceState")
+        savedInstacneState.putInt(KEY_INDEX, quizViewModel.currentIndex)
+    }
+
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "stop")
@@ -95,7 +105,7 @@ class MainActivity : AppCompatActivity() {
      * 이전 질문으로 돌아가기
      */
     private fun updatePrevQuestion() {
-        if (quizViewModel.getCurrentIndex == 0) quizViewModel.moveToLast()
+        if (quizViewModel.currentIndex == 0) quizViewModel.moveToLast()
         else quizViewModel.moveToPrev()
         updateQuestion()
     }
@@ -104,9 +114,7 @@ class MainActivity : AppCompatActivity() {
      * 다음 질문으로 가기
      */
     private fun updateNextQuestion() {
-        Log.d(TAG, "updateNextQuestion | 클릭 전 question : ${quizViewModel.currentQuestionId}, ${quizViewModel.getCurrentIndex}")
         quizViewModel.moveToNext()
-        Log.d(TAG, "updateNextQuestion | 클릭 후 question : ${quizViewModel.currentQuestionId}, ${quizViewModel.getCurrentIndex}")
         updateQuestion()
     }
 
@@ -117,7 +125,6 @@ class MainActivity : AppCompatActivity() {
         // 챌린지 1. 정답 맞춘 문제를 건너띄기
         isOverlapQuestion()
         val questionTextResId = quizViewModel.currentQuestionId
-        Log.d(TAG, "updateQuestion | 현재 question : ${questionTextResId}")
         mainBinding.tvQuestion.setText(questionTextResId)
     }
 
@@ -126,7 +133,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
-        Log.d(TAG, "checkAnswer | 현재 question : ${quizViewModel.currentQuestionId}")
         val messageResId = when (userAnswer == correctAnswer) {
             // 챌린지 2. 점수 보여주기. -> 마지막 문제인지 확인하고 마지막이면 정답 체크 후 점수를 백분율로 보여주기.
             true -> {
@@ -145,7 +151,7 @@ class MainActivity : AppCompatActivity() {
      * 마지막 문제에서 몇 개 맞췄는지 확인
      */
     private fun checkLastQuestion() {
-        if (quizViewModel.getCurrentIndex == quizViewModel.questionBoxSize - 1) {
+        if (quizViewModel.currentIndex == quizViewModel.questionBoxSize - 1) {
             val ratioCorrectQuestion =
                 ((correctQuestions.size.toDouble() / quizViewModel.questionBoxSize.toDouble()) * 100.0).toInt()
             Toast.makeText(
