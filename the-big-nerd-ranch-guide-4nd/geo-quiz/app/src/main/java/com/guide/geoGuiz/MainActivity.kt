@@ -11,6 +11,7 @@ import com.guide.geoGuiz.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding // 컴파일 시점에 초기화 되는 것은 불가능하기 때문에 lateinit
     private var currentIndex = 0
+    private val TAG = "MainActivity"
     // TODO 모델 데이터를 저장하는 더 좋은 방법이 있지만 우선은 간단하게 List로 생성해서 사용하기
     private val questionBank = listOf(
         Question(R.string.question_americas, true),
@@ -33,12 +34,10 @@ class MainActivity : AppCompatActivity() {
         updateQuestion(tvQuestion)
 
         btnTrue.setOnClickListener {
-            Log.d("btn", "true btn 작동")
             checkAnswer(true)
         }
 
         btnFalse.setOnClickListener {
-            Log.d("btn", "false btn 작동")
             checkAnswer(false)
         }
 
@@ -57,10 +56,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
     private fun updatePrevQuestion(tvQuestion: TextView) {
         if (currentIndex > 0) {
             currentIndex -= 1
-            Log.d("btn", "이전 질문 버튼 실행 ${currentIndex}")
             updateQuestion(tvQuestion)
         }
     }
