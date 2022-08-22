@@ -1,5 +1,6 @@
 package com.guide.geoGuiz
 
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -9,7 +10,7 @@ import com.guide.geoGuiz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding // 컴파일 시점에 초기화 되는 것은 불가능하기 때문에 lateinit
-    private val correctUserQuestions = mutableSetOf<Int>()
+    private val correctQuestions = mutableSetOf<Int>()
     private var currentIndex = 0
     private val TAG = "MainActivity"
 
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        Log.d(TAG, "create")
         setContentView(mainBinding.root)
         val btnTrue = mainBinding.btnTrue
         val btnFalse = mainBinding.btnFalse
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun isOverlapQuestion() {
         val currentQuestionId = questionBank[currentIndex].textResId
-        when (correctUserQuestions.contains(currentQuestionId)) {
+        when (correctQuestions.contains(currentQuestionId)) {
             // stack에 존재한다면 false -> 버튼 클릭 못하게 바꿈
             true -> changedButtonEnabled(false)
             false -> changedButtonEnabled(true)
@@ -82,10 +82,9 @@ class MainActivity : AppCompatActivity() {
      * 이전 질문으로 돌아가기
      */
     private fun updatePrevQuestion(tvQuestion: TextView) {
-        if (currentIndex > 0) {
-            currentIndex -= 1
-            updateQuestion(tvQuestion)
-        }
+        if (currentIndex == 0) currentIndex = questionBank.size - 1
+        else currentIndex -= 1
+        updateQuestion(tvQuestion)
     }
 
     /**
@@ -100,6 +99,7 @@ class MainActivity : AppCompatActivity() {
      * 질문 업데이트
      */
     private fun updateQuestion(tvQuestion: TextView) {
+        // 챌린지 1. 정답 맞춘 문제를 건너띄기
         isOverlapQuestion()
         val questionTextResId = questionBank[currentIndex].textResId
         tvQuestion.setText(questionTextResId)
@@ -111,16 +111,26 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = questionBank[currentIndex].answer
         val messageResId = when (userAnswer == correctAnswer) {
-            // 챌린지 1. 정답 맞춘 문제를 건너띄기
+            // 챌린지 2. 점수 보여주기. -> 마지막 문제인지 확인하고 마지막이면 정답 체크 후 점수를 백분율로 보여주기.
             true -> {
-                correctUserQuestions.add(questionBank[currentIndex].textResId)
-                mainBinding.btnTrue.isEnabled = false
-                mainBinding.btnFalse.isEnabled = false
+                correctQuestions.add(questionBank[currentIndex].textResId)
+                changedButtonEnabled(false)
                 R.string.correct_toast
             }
             false -> R.string.inCorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+        checkLastQuestion()
+    }
+
+    /**
+     * 마지막 문제에서 몇 개 맞췄는지 확인
+     */
+    private fun checkLastQuestion() {
+        if (currentIndex == questionBank.size - 1) {
+            val ratioCorrectQuestion = ((correctQuestions.size.toDouble() / questionBank.size.toDouble()) * 100.0).toInt()
+            Toast.makeText(this, getString(R.string.ratio_correct, ratioCorrectQuestion), Toast.LENGTH_SHORT).show()
+        } else updateNextQuestion(mainBinding.tvQuestion)
     }
 }
