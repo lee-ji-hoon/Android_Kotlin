@@ -1,8 +1,6 @@
 package com.guide.geoGuiz
 
-import android.app.ActivityOptions
 import android.content.Intent
-import android.os.Build
 import android.os.Build.*
 import android.os.Bundle
 import android.util.Log
@@ -57,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             updatePrevQuestion()
         }
 
+
         // startActivityForResult가 deprecated됐기 때문에 대체할 방법인 ActivityResultLauncher 사용
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
@@ -76,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             if (VERSION.SDK_INT >= VERSION_CODES.M) getResult.launch(intent, options)
             else getResult.launch(intent)
         }
+        mainBinding.tvCheat.text = quizViewModel.tvCheatCount
     }
 
     override fun onStart() {

@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModel
  * @desc
  */
 private const val TAG = "QuizViewModel"
+private const val MAX_CHEAT_COUNT = 3
 
 class QuizViewModel : ViewModel() {
     var currentIndex = 0
+    var cheatCount = 0
 
     // TODO 모델 데이터를 저장하는 더 좋은 방법이 있지만 우선은 간단하게 List로 생성해서 사용하기
     private val questionBank = listOf(
@@ -33,8 +35,15 @@ class QuizViewModel : ViewModel() {
         get() = questionBank.size
     val getCheatCount: Int
         get() = questionBank.filter { it.isCheat }.size
+    val tvCheatCount: String
+        get() = "남은 커닝 횟수 : ${MAX_CHEAT_COUNT - cheatCount}"
     fun moveToLast() { currentIndex = questionBoxSize - 1 }
     fun moveToNext() { currentIndex = (currentIndex + 1) % questionBank.size}
     fun moveToPrev() { currentIndex-- }
-    fun useCheat() {questionBank[currentIndex].isCheat = true}
+    fun useCheat(): Boolean {
+        // 커닝 횟수 제한하기
+        if (cheatCount >= 3) return false
+        questionBank[currentIndex].isCheat = true
+        return true
+    }
 }
