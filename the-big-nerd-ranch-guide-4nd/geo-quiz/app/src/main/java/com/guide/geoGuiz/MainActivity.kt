@@ -1,8 +1,11 @@
 package com.guide.geoGuiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.guide.geoGuiz.databinding.ActivityMainBinding
@@ -12,6 +15,7 @@ private const val KEY_INDEX = "index"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding // 컴파일 시점에 초기화 되는 것은 불가능하기 때문에 lateinit
+    private lateinit var getResult: ActivityResultLauncher<Intent>
     private val correctQuestions = mutableSetOf<Int>()
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -45,8 +49,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 챌린지 2. PREVIOUS 버튼 추가
-        mainBinding.btnPrevious?.setOnClickListener {
+        mainBinding.btnPrevious.setOnClickListener {
             updatePrevQuestion()
+        }
+
+        // startActivityForResult가 deprecated됐기 때문에 대체할 방법인 ActivityResultLauncher 사용
+        getResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+                if (activityResult.resultCode == RESULT_OK) {
+                    quizViewModel.isCheater =
+                        activityResult.data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+                }
+            }
+
+        mainBinding.btnCheat.setOnClickListener {
+            val answerIsTrue = quizViewModel.currentQuestionAnswer
+            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+            getResult.launch(intent)
         }
     }
 
@@ -133,14 +152,11 @@ class MainActivity : AppCompatActivity() {
      */
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
-        val messageResId = when (userAnswer == correctAnswer) {
-            // 챌린지 2. 점수 보여주기. -> 마지막 문제인지 확인하고 마지막이면 정답 체크 후 점수를 백분율로 보여주기.
-            true -> {
-                correctQuestions.add(quizViewModel.currentQuestionId)
-                changedButtonEnabled(false)
-                R.string.correct_toast
-            }
-            false -> R.string.inCorrect_toast
+        // 챌린지 2. 점수 보여주기. -> 마지막 문제인지 확인하고 마지막이면 정답 체크 후 점수를 백분율로 보여주기.
+        val messageResId = when  {
+            quizViewModel.isCheater -> R.string.judgement_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.inCorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
