@@ -12,7 +12,6 @@ private const val TAG = "QuizViewModel"
 
 class QuizViewModel : ViewModel() {
     var currentIndex = 0
-    var isCheater = false
 
     // TODO 모델 데이터를 저장하는 더 좋은 방법이 있지만 우선은 간단하게 List로 생성해서 사용하기
     private val questionBank = listOf(
