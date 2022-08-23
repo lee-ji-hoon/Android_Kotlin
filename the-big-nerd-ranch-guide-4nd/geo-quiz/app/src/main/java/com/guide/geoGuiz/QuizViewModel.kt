@@ -1,6 +1,5 @@
 package com.guide.geoGuiz
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 
 /**
