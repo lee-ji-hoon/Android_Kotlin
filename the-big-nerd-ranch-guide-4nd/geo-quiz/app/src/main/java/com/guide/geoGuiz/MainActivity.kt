@@ -82,18 +82,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * 이미 푼 문제인지 확인하는 함수
-     */
-    private fun isOverlapQuestion() {
-        val currentQuestionId = quizViewModel.currentQuestionId
-        when (correctQuestions.contains(currentQuestionId)) {
-            // stack에 존재한다면 false -> 버튼 클릭 못하게 바꿈
-            true -> changedButtonEnabled(false)
-            false -> changedButtonEnabled(true)
-        }
-    }
-
-    /**
      * 버튼 상태 갱신
      */
     private fun changedButtonEnabled(enabled: Boolean) {
@@ -126,6 +114,18 @@ class MainActivity : AppCompatActivity() {
         isOverlapQuestion()
         val questionTextResId = quizViewModel.currentQuestionId
         mainBinding.tvQuestion.setText(questionTextResId)
+    }
+
+    /**
+     * 이미 푼 문제인지 확인하는 함수
+     */
+    private fun isOverlapQuestion() {
+        val currentQuestionId = quizViewModel.currentQuestionId
+        when (correctQuestions.contains(currentQuestionId)) {
+            // stack에 존재한다면 false -> 버튼 클릭 못하게 바꿈
+            true -> changedButtonEnabled(false)
+            false -> changedButtonEnabled(true)
+        }
     }
 
     /**
