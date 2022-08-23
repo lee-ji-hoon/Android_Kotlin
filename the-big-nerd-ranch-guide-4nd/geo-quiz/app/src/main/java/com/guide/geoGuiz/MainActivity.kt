@@ -57,8 +57,9 @@ class MainActivity : AppCompatActivity() {
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
                 if (activityResult.resultCode == RESULT_OK) {
-                    quizViewModel.isCheater =
+                    val answerData =
                         activityResult.data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+                    if (answerData) quizViewModel.useCheat()
                 }
             }
 
@@ -154,8 +155,13 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         // 챌린지 2. 점수 보여주기. -> 마지막 문제인지 확인하고 마지막이면 정답 체크 후 점수를 백분율로 보여주기.
         val messageResId = when {
-            quizViewModel.isCheater -> R.string.judgement_toast
-            userAnswer == correctAnswer -> R.string.correct_toast
+            // 만약 현재 문제를 컨닝 했을 경우
+            quizViewModel.currentQuestionIsCheat -> R.string.judgement_toast
+            userAnswer == correctAnswer -> {
+                correctQuestions.add(quizViewModel.currentQuestionId)
+                changedButtonEnabled(false)
+                R.string.correct_toast
+            }
             else -> R.string.inCorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
@@ -172,7 +178,7 @@ class MainActivity : AppCompatActivity() {
                 ((correctQuestions.size.toDouble() / quizViewModel.questionBoxSize.toDouble()) * 100.0).toInt()
             Toast.makeText(
                 this,
-                getString(R.string.ratio_correct, ratioCorrectQuestion),
+                getString(R.string.ratio_correct, ratioCorrectQuestion, quizViewModel.getCheatCount),
                 Toast.LENGTH_SHORT
             ).show()
         } else updateNextQuestion()

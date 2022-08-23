@@ -28,9 +28,14 @@ class QuizViewModel : ViewModel() {
         get() = questionBank[currentIndex].answer
     val currentQuestionId: Int
         get() = questionBank[currentIndex].textResId
+    val currentQuestionIsCheat: Boolean
+        get() = questionBank[currentIndex].isCheat
     val questionBoxSize
         get() = questionBank.size
+    val getCheatCount: Int
+        get() = questionBank.filter { it.isCheat }.size
     fun moveToLast() { currentIndex = questionBoxSize - 1 }
     fun moveToNext() { currentIndex = (currentIndex + 1) % questionBank.size}
     fun moveToPrev() { currentIndex-- }
+    fun useCheat() {questionBank[currentIndex].isCheat = true}
 }
