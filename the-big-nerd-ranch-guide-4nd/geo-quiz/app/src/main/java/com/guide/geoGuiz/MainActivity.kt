@@ -1,12 +1,16 @@
 package com.guide.geoGuiz
 
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
+import android.os.Build.*
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.guide.geoGuiz.databinding.ActivityMainBinding
 
@@ -63,10 +67,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        mainBinding.btnCheat.setOnClickListener {
+        mainBinding.btnCheat.setOnClickListener { view ->
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            getResult.launch(intent)
+            // 뷰 객체, x, y, 새 액티비티 너비와 높이
+            // android.app.ActivityOptions이전 버전과 호환되는 방식으로 기능에 액세스하기 위한 도우미
+            val options = ActivityOptionsCompat.makeClipRevealAnimation(view, 0, 0, view.width, view.height)
+            if (VERSION.SDK_INT >= VERSION_CODES.M) getResult.launch(intent, options)
+            else getResult.launch(intent)
         }
     }
 
