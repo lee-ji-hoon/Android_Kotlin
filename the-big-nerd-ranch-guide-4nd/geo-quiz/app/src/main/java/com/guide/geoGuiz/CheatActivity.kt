@@ -32,20 +32,20 @@ class CheatActivity : AppCompatActivity() {
                 else -> R.string.false_button
             }
             answerTextView.setText(answerText)
-            setAnswerShowResult(true)
+            setAnswerShowResult()
         }
     }
 
-    private fun setAnswerShowResult(isAnswerShown: Boolean) {
+    private fun setAnswerShowResult() {
         val data = Intent().apply {
-            putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown)
+            putExtra(EXTRA_ANSWER_SHOWN, true)
         }
         setResult(Activity.RESULT_OK, data)
     }
 
     companion object {
         fun newIntent(packageContext: Context, answerIsTrue: Boolean): Intent {
-            return Intent (packageContext, CheatActivity::class.java).apply {
+            return Intent(packageContext, CheatActivity::class.java).apply {
                 putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue)
             }
         }
