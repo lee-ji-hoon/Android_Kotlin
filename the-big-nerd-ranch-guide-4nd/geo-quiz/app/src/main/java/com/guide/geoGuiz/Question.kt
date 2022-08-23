@@ -14,5 +14,6 @@ import androidx.annotation.StringRes
 // 이러한 방법을 사용해서 런타임 시에 앱이 중단되는 것을 방지할 수 있다.
 data class Question(
     @StringRes val textResId: Int,
-    val answer: Boolean
+    val answer: Boolean,
+    val isCheatAnswer: Boolean = false
 )

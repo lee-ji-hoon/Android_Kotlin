@@ -153,14 +153,14 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         // 챌린지 2. 점수 보여주기. -> 마지막 문제인지 확인하고 마지막이면 정답 체크 후 점수를 백분율로 보여주기.
-        val messageResId = when  {
+        val messageResId = when {
             quizViewModel.isCheater -> R.string.judgement_toast
             userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.inCorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
-        checkLastQuestion()
+        if (messageResId != R.string.judgement_toast) checkLastQuestion()
     }
 
     /**
