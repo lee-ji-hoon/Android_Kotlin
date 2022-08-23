@@ -3,6 +3,7 @@ package com.guide.geoGuiz
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -34,6 +35,11 @@ class CheatActivity : AppCompatActivity() {
             answerTextView.setText(answerText)
             setAnswerShowResult()
         }
+
+        // 안드로이드 버전 띄우기
+        val tvVersion = cheatBinding.tvVersion
+        val curVersion = Build.VERSION.SDK_INT
+        tvVersion.append(getString(R.string.current_version, curVersion.toString()))
     }
 
     private fun setAnswerShowResult() {
