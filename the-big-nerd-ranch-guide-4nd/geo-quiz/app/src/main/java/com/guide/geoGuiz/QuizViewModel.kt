@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
  * @desc
  */
 private const val TAG = "QuizViewModel"
-private const val MAX_CHEAT_COUNT = 3
+const val MAX_CHEAT_COUNT = 3
 
 class QuizViewModel : ViewModel() {
     var currentIndex = 0
@@ -40,10 +40,8 @@ class QuizViewModel : ViewModel() {
     fun moveToLast() { currentIndex = questionBoxSize - 1 }
     fun moveToNext() { currentIndex = (currentIndex + 1) % questionBank.size}
     fun moveToPrev() { currentIndex-- }
-    fun useCheat(): Boolean {
-        // 커닝 횟수 제한하기
-        if (cheatCount >= 3) return false
+    fun useCheat(){
+        cheatCount++
         questionBank[currentIndex].isCheat = true
-        return true
     }
 }

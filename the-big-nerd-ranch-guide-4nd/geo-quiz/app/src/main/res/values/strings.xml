@@ -21,4 +21,5 @@
     <string name="judgement_toast">커닝은 나쁜 짓이죠</string>
     <string name="current_version">API 레벨 %1s</string>
     <string name="cheat_count">남은 커닝 횟수 : %2d</string>
+    <string name="unable_cheeat">모든 커닝 횟수를 사용했습니다.</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build.*
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -62,23 +63,55 @@ class MainActivity : AppCompatActivity() {
                 if (activityResult.resultCode == RESULT_OK) {
                     val answerData =
                         activityResult.data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
-                    if (answerData) quizViewModel.useCheat()
+                    if (answerData) {
+                        quizViewModel.useCheat()
+                        changeCheatCount()
+                    }
                 }
             }
 
         mainBinding.btnCheat.setOnClickListener { view ->
-            val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            // 뷰 객체, x, y, 새 액티비티 너비와 높이
-            // android.app.ActivityOptions이전 버전과 호환되는 방식으로 기능에 액세스하기 위한 도우미
-            val options = ActivityOptionsCompat.makeClipRevealAnimation(view, 0, 0, view.width, view.height)
-            if (VERSION.SDK_INT >= VERSION_CODES.M) getResult.launch(intent, options)
-            else getResult.launch(intent)
+            when (isUseCheat()) {
+                true -> startCheatIntent(view)
+                false -> {
+                    Toast.makeText(this, getString(R.string.unable_cheeat), Toast.LENGTH_SHORT).show()
+                    mainBinding.btnCheat.isEnabled = false
+                }
+            }
         }
+        changeCheatCount()
+    }
+
+    /**
+     * cheatCount 변경
+     */
+    private fun changeCheatCount() {
         mainBinding.tvCheat.text = quizViewModel.tvCheatCount
     }
 
-    override fun onStart() {
+    /**
+     * CheatAcivity 시작
+     */
+    private fun startCheatIntent(view: View) {
+        val answerIsTrue = quizViewModel.currentQuestionAnswer
+        val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+        // android.app.ActivityOptions이전 버전과 호환되는 방식으로 기능에 액세스하기 위한 도우미
+        val options =
+            ActivityOptionsCompat.makeClipRevealAnimation(view, 0, 0, view.width, view.height) // 뷰 객체, x, y, 새 액티비티 너비와 높이
+        if (VERSION.SDK_INT >= VERSION_CODES.M) getResult.launch(intent, options)
+        else getResult.launch(intent)
+    }
+
+    /**
+     * 치트를 사용할 수 있는지 확인
+     */
+    private fun isUseCheat(): Boolean {
+        val cheatCount = quizViewModel.cheatCount
+        if (cheatCount >= MAX_CHEAT_COUNT) return false
+        return true
+    }
+
+    /*override fun onStart() {
         super.onStart()
         Log.d(TAG, "start")
     }
@@ -107,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "destroy")
-    }
+    }*/
 
     /**
      * 버튼 상태 갱신
@@ -186,7 +219,11 @@ class MainActivity : AppCompatActivity() {
                 ((correctQuestions.size.toDouble() / quizViewModel.questionBoxSize.toDouble()) * 100.0).toInt()
             Toast.makeText(
                 this,
-                getString(R.string.ratio_correct, ratioCorrectQuestion, quizViewModel.getCheatCount),
+                getString(
+                    R.string.ratio_correct,
+                    ratioCorrectQuestion,
+                    quizViewModel.getCheatCount
+                ),
                 Toast.LENGTH_SHORT
             ).show()
         } else updateNextQuestion()
