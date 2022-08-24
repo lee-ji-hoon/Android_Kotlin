@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
  */
 
 class CrimeListViewModel : ViewModel() {
-    private val crimes = mutableListOf<Crime>()
+    val crimes = mutableListOf<Crime>()
     init {
         for (i in 0 until 100) {
             val crime = Crime()
