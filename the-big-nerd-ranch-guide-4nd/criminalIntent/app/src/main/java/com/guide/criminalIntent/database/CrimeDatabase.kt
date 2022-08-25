@@ -2,6 +2,7 @@ package com.guide.criminalIntent.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.guide.criminalIntent.Crime
 
 /**
@@ -16,6 +17,7 @@ import com.guide.criminalIntent.Crime
  * 이런 이유로 엔티티 클래스를 DB와 연관시켜줘야 Room이 테이블 생성하는데 사용할 수 있다.
  */
 @Database(entities = [Crime::class], version = 1)
+@TypeConverters(CrimeTypeConverters::class)
 abstract class CrimeDatabase : RoomDatabase() {
 
 }
