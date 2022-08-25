@@ -24,9 +24,7 @@ import com.guide.criminalIntent.databinding.ListItemCrimeBinding
 private const val TAG = "CrimeListFragment"
 
 class CrimeListFragment : Fragment() {
-
     private lateinit var crimeRecyclerView: RecyclerView
-    private var adapter: CrimeAdapter? = null
     private lateinit var crimeListBinding: FragmentCrimeListBinding
     private lateinit var listItemCrimeBinding: ListItemCrimeBinding
 
@@ -34,6 +32,9 @@ class CrimeListFragment : Fragment() {
         fun newInstance(): CrimeListFragment {
             return CrimeListFragment()
         }
+
+        const val TYPE_NORMAL = 0
+        const val TYPE_POLICE = 1
     }
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
@@ -60,11 +61,12 @@ class CrimeListFragment : Fragment() {
 
     private fun updateUI() {
         val crimes = crimeListViewModel.crimes
-        adapter = CrimeAdapter(crimes)
+        val adapter = CrimeAdapter(crimes)
         crimeRecyclerView.adapter = adapter
     }
 
-    private inner class CrimeHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    private inner class CrimeHolder(view: View) : RecyclerView.ViewHolder(view),
+        View.OnClickListener {
         private lateinit var crime: Crime
         private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title) ?: null
         private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date) ?: null
@@ -80,24 +82,56 @@ class CrimeListFragment : Fragment() {
         }
 
         override fun onClick(p0: View?) {
-            Toast.makeText(context,"${crime.title} | ${crime.date}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${crime.title} | ${crime.date}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private inner class CrimeHolderWithPolice(view: View) : RecyclerView.ViewHolder(view),
+        View.OnClickListener {
+        private lateinit var crime: Crime
+        private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title) ?: null
+        private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date) ?: null
+        private val policeButton = itemView.findViewById<TextView>(R.id.btn_police) ?: null
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        fun bind(crime: Crime) {
+            this.crime = crime
+            titleTextView?.text = this.crime.title
+            dateTextView?.text = this.crime.date.toString()
+        }
+
+        override fun onClick(p0: View?) {
+            Toast.makeText(context, "${crime.title} | ${crime.date} | 경찰에게 연락", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
     private inner class CrimeAdapter(var crimes: List<Crime>) :
-        RecyclerView.Adapter<CrimeHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
-            val view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
-            return CrimeHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-            val crime = crimes[position]
-            holder.bind(crime)
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return when (viewType) {
+                TYPE_POLICE -> CrimeHolderWithPolice(layoutInflater.inflate(R.layout.list_item_crime_police,parent,false))
+                else -> CrimeHolder(layoutInflater.inflate(R.layout.list_item_crime, parent, false))
+            }
         }
 
         override fun getItemCount(): Int {
             return crimes.size
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return if (crimes[position].requirePolice) TYPE_POLICE
+            else TYPE_NORMAL
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            when (getItemViewType(position)) {
+                TYPE_POLICE -> (holder as CrimeHolderWithPolice).bind(crimes[position])
+                TYPE_NORMAL -> (holder as CrimeHolder).bind(crimes[position])
+            }
         }
     }
 }

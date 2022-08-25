@@ -24,7 +24,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7eeb74cb-6c3b-475f-acd0-218173380a4f" name="Changes" comment="Feat: CrimeListFragment">
+      <change afterPath="$PROJECT_DIR$/../criminalIntent/app/src/main/res/layout/list_item_crime_police.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../criminalIntent/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../criminalIntent/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../criminalIntent/app/src/main/java/com/guide/criminalIntent/Crime.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../criminalIntent/app/src/main/java/com/guide/criminalIntent/Crime.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../criminalIntent/app/src/main/java/com/guide/criminalIntent/CrimeListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../criminalIntent/app/src/main/java/com/guide/criminalIntent/CrimeListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../criminalIntent/app/src/main/java/com/guide/criminalIntent/CrimeListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../criminalIntent/app/src/main/java/com/guide/criminalIntent/CrimeListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../criminalIntent/app/src/main/res/layout/list_item_crime.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../criminalIntent/app/src/main/res/layout/list_item_crime.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
