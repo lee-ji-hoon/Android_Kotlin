@@ -72,10 +72,6 @@ class CrimeListFragment : Fragment() {
         private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title) ?: null
         private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date) ?: null
 
-        init {
-            itemView.setOnClickListener(this)
-        }
-
         fun bind(crime: Crime) {
             this.crime = crime
             titleTextView?.text = this.crime.title
