@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -86,34 +87,10 @@ class CrimeListFragment : Fragment() {
         }
     }
 
-    private inner class CrimeHolderWithPolice(view: View) : RecyclerView.ViewHolder(view),
-        View.OnClickListener {
-        private lateinit var crime: Crime
-        private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title) ?: null
-        private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date) ?: null
-        private val policeButton = itemView.findViewById<TextView>(R.id.btn_police) ?: null
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        fun bind(crime: Crime) {
-            this.crime = crime
-            titleTextView?.text = this.crime.title
-            dateTextView?.text = this.crime.date.toString()
-        }
-
-        override fun onClick(p0: View?) {
-            Toast.makeText(context, "${crime.title} | ${crime.date} | 경찰에게 연락", Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
-    private inner class CrimeAdapter(var crimes: List<Crime>) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    private inner class CrimeAdapter(var crimes: List<Crime>) : RecyclerView.Adapter<CrimeHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
             return when (viewType) {
-                TYPE_POLICE -> CrimeHolderWithPolice(layoutInflater.inflate(R.layout.list_item_crime_police,parent,false))
+                TYPE_POLICE -> CrimeHolder(layoutInflater.inflate(R.layout.list_item_crime_police,parent,false))
                 else -> CrimeHolder(layoutInflater.inflate(R.layout.list_item_crime, parent, false))
             }
         }
@@ -127,11 +104,12 @@ class CrimeListFragment : Fragment() {
             else TYPE_NORMAL
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            when (getItemViewType(position)) {
-                TYPE_POLICE -> (holder as CrimeHolderWithPolice).bind(crimes[position])
-                TYPE_NORMAL -> (holder as CrimeHolder).bind(crimes[position])
+        override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
+            val btn = holder.itemView.findViewById<Button>(R.id.btn_police)
+            btn?.setOnClickListener {
+                Toast.makeText(context, "경찰에게 연락 버튼 클릭", Toast.LENGTH_SHORT).show()
             }
+            holder.bind(crimes[position])
         }
     }
 }
