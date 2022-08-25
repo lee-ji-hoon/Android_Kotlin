@@ -67,8 +67,15 @@ class CrimeListFragment : Fragment() {
     }
 
     private inner class CrimeHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleTextView = view.findViewById<TextView>(R.id.tv_crime_title) ?: null
-        val dateTextView = view.findViewById<TextView>(R.id.tv_crime_date) ?: null
+        private lateinit var crime: Crime
+        private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title) ?: null
+        private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date) ?: null
+
+        fun bind(crime: Crime) {
+            this.crime = crime
+            titleTextView?.text = this.crime.title
+            dateTextView?.text = this.crime.date.toString()
+        }
     }
 
     private inner class CrimeAdapter(var crimes: List<Crime>) :
@@ -82,11 +89,7 @@ class CrimeListFragment : Fragment() {
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
             Log.d(TAG, "onBindViewHolder 실행")
             val crime = crimes[position]
-            holder.apply {
-                Log.d(TAG, "crime -> ${crime.title}, ${crime.date}")
-                titleTextView?.text = crime.title
-                dateTextView?.text = crime.date.toString()
-            }
+            holder.bind(crime)
         }
 
         override fun getItemCount(): Int {
