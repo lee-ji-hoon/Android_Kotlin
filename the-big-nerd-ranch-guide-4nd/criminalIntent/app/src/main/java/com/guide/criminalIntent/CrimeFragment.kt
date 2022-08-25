@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.guide.criminalIntent.databinding.ActivityMainBinding
 import com.guide.criminalIntent.databinding.FragmentCrimeBinding
 
 /**
