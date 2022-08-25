@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.guide.criminalIntent.databinding.FragmentCrimeListBinding
 import com.guide.criminalIntent.databinding.ListItemCrimeBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author jihoon
@@ -75,7 +77,11 @@ class CrimeListFragment : Fragment() {
         fun bind(crime: Crime) {
             this.crime = crime
             titleTextView?.text = this.crime.title
-            dateTextView?.text = this.crime.date.toString()
+            dateTextView?.text = setDateFormat(this.crime.date)
+        }
+
+        private fun setDateFormat(date: Date): String {
+            return SimpleDateFormat("EEEE, MMM dd, yyyy",Locale.getDefault()).format(date)
         }
 
         override fun onClick(p0: View?) {
