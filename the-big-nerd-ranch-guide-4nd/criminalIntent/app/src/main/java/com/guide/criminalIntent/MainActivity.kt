@@ -2,6 +2,7 @@ package com.guide.criminalIntent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.guide.criminalIntent.database.CrimeRepository
 import com.guide.criminalIntent.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,5 +20,6 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
+        CrimeRepository.initialize(this)
     }
 }

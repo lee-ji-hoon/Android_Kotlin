@@ -12,8 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.guide.criminalIntent.databinding.FragmentCrimeListBinding
-import com.guide.criminalIntent.databinding.ListItemCrimeBinding
+import androidx.lifecycle.Observer
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,8 +27,7 @@ private const val TAG = "CrimeListFragment"
 
 class CrimeListFragment : Fragment() {
     private lateinit var crimeRecyclerView: RecyclerView
-    private lateinit var crimeListBinding: FragmentCrimeListBinding
-    private lateinit var listItemCrimeBinding: ListItemCrimeBinding
+    private var adapter: CrimeAdapter? = CrimeAdapter(emptyList())
 
     companion object {
         fun newInstance(): CrimeListFragment {
@@ -44,12 +42,6 @@ class CrimeListFragment : Fragment() {
         ViewModelProvider(this)[CrimeListViewModel::class.java]
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        crimeListBinding = FragmentCrimeListBinding.inflate(layoutInflater)
-        listItemCrimeBinding = ListItemCrimeBinding.inflate(layoutInflater)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,13 +50,22 @@ class CrimeListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_crime_list, container, false)
         crimeRecyclerView = view.findViewById(R.id.crime_recycler_view)
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
-        updateUI()
+        crimeRecyclerView.adapter = adapter
         return view
     }
 
-    private fun updateUI() {
-        val crimes = crimeListViewModel.crimes
-        val adapter = CrimeAdapter(crimes)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        crimeListViewModel.crimeListLiveData.observe(viewLifecycleOwner) { crimes ->
+            crimes?.let {
+                Log.i(TAG, "Got crimes ${crimes.size}")
+                updateUI(crimes)
+            }
+        }
+    }
+
+    private fun updateUI(crimes: List<Crime>) {
+        adapter = CrimeAdapter(crimes)
         crimeRecyclerView.adapter = adapter
     }
 
@@ -102,8 +103,7 @@ class CrimeListFragment : Fragment() {
         }
 
         override fun getItemViewType(position: Int): Int {
-            return if (crimes[position].requirePolice) TYPE_POLICE
-            else TYPE_NORMAL
+            return TYPE_NORMAL
         }
 
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {

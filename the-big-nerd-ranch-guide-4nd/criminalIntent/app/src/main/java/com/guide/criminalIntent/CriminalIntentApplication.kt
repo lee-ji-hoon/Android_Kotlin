@@ -1,6 +1,7 @@
 package com.guide.criminalIntent
 
 import android.app.Application
+import android.util.Log
 import com.guide.criminalIntent.database.CrimeRepository
 
 /**
@@ -10,9 +11,11 @@ import com.guide.criminalIntent.database.CrimeRepository
  * @desc
  */
 
-class CriminalIntentApplication: Application() {
+// TODO onCreate()임에도 불구하고 늦게 실행돼서 오류가 발생함
+/*
+class CriminalIntentApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         CrimeRepository.initialize(this)
     }
-}
+}*/
