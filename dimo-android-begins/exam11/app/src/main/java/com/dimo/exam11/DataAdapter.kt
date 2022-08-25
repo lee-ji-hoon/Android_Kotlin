@@ -1,5 +1,6 @@
 package com.dimo.exam11
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -16,6 +17,7 @@ class DataAdapter(
     private val list: List<Int>
 ) : RecyclerView.Adapter<DataViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
+        Log.d("실행", "onCreateViewHolder")
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_integer, parent, false)
         view.setOnClickListener { v ->
@@ -29,6 +31,7 @@ class DataAdapter(
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
+        Log.d("실행", "onBindViewHolder")
         val tvInteger = holder.itemView.findViewById<TextView>(R.id.tv_integer)
         tvInteger.text = list[position].toString()
         holder.itemView.tag = getItemId(position)
@@ -36,6 +39,7 @@ class DataAdapter(
     }
 
     override fun getItemId(position: Int): Long {
+        Log.d("실행", "getItemId")
         return position.toLong()
     }
 
@@ -43,6 +47,7 @@ class DataAdapter(
     var onItemSelectionChangedListener : ((MutableList<Long>) -> Unit)? = null
 
     override fun getItemCount(): Int {
+        Log.d("실행", "getItemCount")
         return list.count()
     }
 }
