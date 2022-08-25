@@ -84,8 +84,8 @@ class CrimeListFragment : Fragment() {
             val crime = crimes[position]
             holder.apply {
                 Log.d(TAG, "crime -> ${crime.title}, ${crime.date}")
-                titleTextView.text = crime.title
-                dateTextView.text = crime.date.toString()
+                titleTextView?.text = crime.title
+                dateTextView?.text = crime.date.toString()
             }
         }
 
