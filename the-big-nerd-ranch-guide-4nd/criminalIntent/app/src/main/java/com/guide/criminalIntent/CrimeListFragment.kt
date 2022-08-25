@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -71,13 +72,18 @@ class CrimeListFragment : Fragment() {
     private inner class CrimeHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnClickListener {
         private lateinit var crime: Crime
-        private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title) ?: null
-        private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date) ?: null
+        private val titleTextView = itemView.findViewById<TextView>(R.id.tv_crime_title)
+        private val dateTextView = itemView.findViewById<TextView>(R.id.tv_crime_date)
+        private val solvedImageView = itemView.findViewById<ImageView>(R.id.iv_solved)
 
         fun bind(crime: Crime) {
             this.crime = crime
-            titleTextView?.text = this.crime.title
-            dateTextView?.text = setDateFormat(this.crime.date)
+            titleTextView.text = this.crime.title
+            dateTextView.text = setDateFormat(this.crime.date)
+            solvedImageView.visibility = when(crime.isSolved) {
+                true -> View.VISIBLE
+                false -> View.INVISIBLE
+            }
         }
 
         private fun setDateFormat(date: Date): String {
