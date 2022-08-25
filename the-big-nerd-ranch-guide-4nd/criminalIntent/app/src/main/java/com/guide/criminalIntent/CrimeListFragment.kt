@@ -43,7 +43,6 @@ class CrimeListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         crimeListBinding = FragmentCrimeListBinding.inflate(layoutInflater)
         listItemCrimeBinding = ListItemCrimeBinding.inflate(layoutInflater)
-        Log.d(TAG, "Total crimes: ${crimeListViewModel.crimes.size}")
     }
 
     override fun onCreateView(
@@ -54,13 +53,11 @@ class CrimeListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_crime_list, container, false)
         crimeRecyclerView = view.findViewById(R.id.crime_recycler_view)
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
-        Log.d(TAG, "onCreateView 실행")
         updateUI()
         return view
     }
 
     private fun updateUI() {
-        Log.d(TAG, "updateUI 실행")
         val crimes = crimeListViewModel.crimes
         adapter = CrimeAdapter(crimes)
         crimeRecyclerView.adapter = adapter
@@ -81,19 +78,16 @@ class CrimeListFragment : Fragment() {
     private inner class CrimeAdapter(var crimes: List<Crime>) :
         RecyclerView.Adapter<CrimeHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
-            Log.d(TAG, "onCreateViewHolder 실행")
             val view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
             return CrimeHolder(view)
         }
 
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-            Log.d(TAG, "onBindViewHolder 실행")
             val crime = crimes[position]
             holder.bind(crime)
         }
 
         override fun getItemCount(): Int {
-            Log.d(TAG, "getItemCount 실행")
             return crimes.size
         }
     }
