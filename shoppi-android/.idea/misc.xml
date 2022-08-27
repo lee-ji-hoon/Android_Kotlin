@@ -12,6 +12,9 @@
         <entry key="app/src/main/res/drawable/ic_tabbar_category_on.xml" value="0.169" />
         <entry key="app/src/main/res/drawable/ic_tabbar_home_off.xml" value="0.169" />
         <entry key="app/src/main/res/drawable/ic_tabbar_home_on.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/selector_cart_icon.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/selector_category_icon.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/selector_home_icon.xml" value="0.169" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1940222897669706" />
