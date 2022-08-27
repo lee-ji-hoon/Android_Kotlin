@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import org.json.JSONObject
 
 /**
  * @author jihoon
@@ -38,5 +39,24 @@ class HomeFragment : Fragment() {
         // context로 바로 접근하면 null일수도 있으므로 requireContext로 접근
         val homeData = assetLoader.getJsonString(requireContext(), "home.json")
         Log.d("homeData", homeData ?: "NULL")
+
+        if (!homeData.isNullOrEmpty()) {
+            val jsonObject = JSONObject(homeData)
+            val title = jsonObject.getJSONObject("title")
+            val text = title.getString("text")
+            val iconUrl = title.getString("icon_url")
+            val titleValue = Title(text, iconUrl)
+
+            val topBanners = jsonObject.getJSONArray("top_banners")
+            val firstBanner = topBanners.getJSONObject(0)
+            val label = firstBanner.getString("label")
+            val productDetail = firstBanner.getJSONObject("product_detail")
+            val price = productDetail.getInt("price")
+
+            Log.d("title", "text = ${text}, iconUrl=${iconUrl}")
+            Log.d("firstBanner", "label = ${label}, price=${price}")
+
+
+        }
     }
 }
