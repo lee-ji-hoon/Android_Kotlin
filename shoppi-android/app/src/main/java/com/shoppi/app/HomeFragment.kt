@@ -39,14 +39,25 @@ class HomeFragment : Fragment() {
         val assetLoader = AssetLoader()
         // context로 바로 접근하면 null일수도 있으므로 requireContext로 접근
         val homeData = assetLoader.getJsonString(requireContext(), "home.json")
+<<<<<<< HEAD
 
         if (!homeData.isNullOrEmpty()) {
             Log.d("homeData", homeData ?: "NULL")
+=======
+        Log.d("homeData", homeData ?: "NULL")
+
+        if (!homeData.isNullOrEmpty()) {
+>>>>>>> 9094658154e4f99d32a8765aa510569fbe028237
             val jsonObject = JSONObject(homeData)
             val title = jsonObject.getJSONObject("title")
             val text = title.getString("text")
             val iconUrl = title.getString("icon_url")
             val titleValue = Title(text, iconUrl)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9094658154e4f99d32a8765aa510569fbe028237
 
             val toolbarHomeTitle = view.findViewById<TextView>(R.id.toolbar_home_title)
             val toolbarIcon = view.findViewById<ImageView>(R.id.toolbar_home_icon)
@@ -56,6 +67,13 @@ class HomeFragment : Fragment() {
                 .load(iconUrl)
                 .into(toolbarIcon)
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> dc4b83568ac0e82c38366a70499e7fdc410f1193
+=======
+>>>>>>> dc4b83568ac0e82c38366a70499e7fdc410f1193
+>>>>>>> 9094658154e4f99d32a8765aa510569fbe028237
         }
     }
 }
