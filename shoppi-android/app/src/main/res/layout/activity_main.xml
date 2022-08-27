@@ -6,44 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@color/shoppi_white">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            app:contentInsetStart="0dp"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <TextView
-                android:id="@+id/toolbar_home_title"
-                style="@style/TextTitleAppbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingTop="32dp"
-                android:paddingBottom="24dp"
-                tools:text="Ezhoon님 이런 상품 \n어때요?" />
-
-            <ImageView
-                android:id="@+id/toolbar_home_icon"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="4dp"
-                android:contentDescription="로고이미지"
-                android:src="@drawable/img_logo_home" />
-        </androidx.appcompat.widget.Toolbar>
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
