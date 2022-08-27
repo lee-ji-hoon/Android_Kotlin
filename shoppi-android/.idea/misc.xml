@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/drawable/selector_cart_icon.xml" value="0.169" />
         <entry key="app/src/main/res/drawable/selector_category_icon.xml" value="0.169" />
         <entry key="app/src/main/res/drawable/selector_home_icon.xml" value="0.169" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.16717325227963525" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.16033434650455927" />

@@ -1,12 +1,15 @@
 package com.shoppi.app
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import org.json.JSONObject
 
 /**
  * @author jihoon
@@ -28,9 +31,31 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val button = view.findViewById<Button>(R.id.btn_enter_product_detail)
+        /*val button = view.findViewById<Button>(R.id.btn_enter_product_detail)
         button.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_product_detail)
+        }*/
+
+        val assetLoader = AssetLoader()
+        // context로 바로 접근하면 null일수도 있으므로 requireContext로 접근
+        val homeData = assetLoader.getJsonString(requireContext(), "home.json")
+
+        if (!homeData.isNullOrEmpty()) {
+            Log.d("homeData", homeData ?: "NULL")
+            val jsonObject = JSONObject(homeData)
+            val title = jsonObject.getJSONObject("title")
+            val text = title.getString("text")
+            val iconUrl = title.getString("icon_url")
+            val titleValue = Title(text, iconUrl)
+
+            val toolbarHomeTitle = view.findViewById<TextView>(R.id.toolbar_home_title)
+            val toolbarIcon = view.findViewById<ImageView>(R.id.toolbar_home_icon)
+
+            toolbarHomeTitle.text = titleValue.text
+            Glide.with(this)
+                .load(iconUrl)
+                .into(toolbarIcon)
+
         }
     }
 }
