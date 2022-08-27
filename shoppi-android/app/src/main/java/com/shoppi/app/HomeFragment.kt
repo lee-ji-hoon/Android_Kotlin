@@ -5,9 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import org.json.JSONObject
 
 /**
@@ -30,10 +31,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val button = view.findViewById<Button>(R.id.btn_enter_product_detail)
+        /*val button = view.findViewById<Button>(R.id.btn_enter_product_detail)
         button.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_product_detail)
-        }
+        }*/
 
         val assetLoader = AssetLoader()
         // context로 바로 접근하면 null일수도 있으므로 requireContext로 접근
@@ -46,17 +47,18 @@ class HomeFragment : Fragment() {
             val text = title.getString("text")
             val iconUrl = title.getString("icon_url")
             val titleValue = Title(text, iconUrl)
+<<<<<<< HEAD
 
-            val topBanners = jsonObject.getJSONArray("top_banners")
-            val firstBanner = topBanners.getJSONObject(0)
-            val label = firstBanner.getString("label")
-            val productDetail = firstBanner.getJSONObject("product_detail")
-            val price = productDetail.getInt("price")
+            val toolbarHomeTitle = view.findViewById<TextView>(R.id.toolbar_home_title)
+            val toolbarIcon = view.findViewById<ImageView>(R.id.toolbar_home_icon)
 
-            Log.d("title", "text = ${text}, iconUrl=${iconUrl}")
-            Log.d("firstBanner", "label = ${label}, price=${price}")
+            toolbarHomeTitle.text = titleValue.text
+            Glide.with(this)
+                .load(iconUrl)
+                .into(toolbarIcon)
 
-
+=======
+>>>>>>> dc4b83568ac0e82c38366a70499e7fdc410f1193
         }
     }
 }
