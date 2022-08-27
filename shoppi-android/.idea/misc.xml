@@ -6,10 +6,17 @@
         <entry key="app/src/main/res/drawable/background_splash_screen.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/drawable/ic_gnb_back.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.24166666666666667" />
+        <entry key="app/src/main/res/drawable/ic_tabbar_cart_off.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/ic_tabbar_cart_on.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/ic_tabbar_category_off.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/ic_tabbar_category_on.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/ic_tabbar_home_off.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/ic_tabbar_home_on.xml" value="0.169" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1940222897669706" />
         <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.35054347826086957" />
+        <entry key="app/src/main/res/menu/nvaigation_main.xml" value="0.28515625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19814814814814816" />
       </map>
