@@ -13,6 +13,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tolls:text="테스트"
-         />
+        tolls:text="테스트" />
 </androidx.constraintlayout.widget.ConstraintLayout>
