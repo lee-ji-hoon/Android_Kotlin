@@ -46,17 +46,6 @@ class HomeFragment : Fragment() {
             val text = title.getString("text")
             val iconUrl = title.getString("icon_url")
             val titleValue = Title(text, iconUrl)
-
-            val topBanners = jsonObject.getJSONArray("top_banners")
-            val firstBanner = topBanners.getJSONObject(0)
-            val label = firstBanner.getString("label")
-            val productDetail = firstBanner.getJSONObject("product_detail")
-            val price = productDetail.getInt("price")
-
-            Log.d("title", "text = ${text}, iconUrl=${iconUrl}")
-            Log.d("firstBanner", "label = ${label}, price=${price}")
-
-
         }
     }
 }
