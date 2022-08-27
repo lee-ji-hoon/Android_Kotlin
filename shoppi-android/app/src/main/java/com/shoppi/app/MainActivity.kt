@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() { // AppCompatActivity() -> 이전 버�
         bottomNavigationView.itemIconTintList = null // 기본 컬러값 사용안하게끔 변경
 
         val navController = supportFragmentManager.findFragmentById(R.id.container_main)?.findNavController()
-        navController?.let { navController ->
-            bottomNavigationView.setupWithNavController(navController)
+        navController?.let {
+            bottomNavigationView.setupWithNavController(it)
         }
     }
 
