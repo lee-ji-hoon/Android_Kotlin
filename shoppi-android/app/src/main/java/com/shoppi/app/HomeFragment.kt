@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             val iconUrl = title.getString("icon_url")
             val titleValue = Title(text, iconUrl)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             val toolbarHomeTitle = view.findViewById<TextView>(R.id.toolbar_home_title)
             val toolbarIcon = view.findViewById<ImageView>(R.id.toolbar_home_icon)
@@ -57,6 +58,8 @@ class HomeFragment : Fragment() {
                 .load(iconUrl)
                 .into(toolbarIcon)
 
+=======
+>>>>>>> dc4b83568ac0e82c38366a70499e7fdc410f1193
 =======
 >>>>>>> dc4b83568ac0e82c38366a70499e7fdc410f1193
         }
