@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
-import org.json.JSONObject
 
 /**
  * @author jihoon

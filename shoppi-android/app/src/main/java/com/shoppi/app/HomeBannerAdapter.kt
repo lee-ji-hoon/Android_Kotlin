@@ -38,18 +38,12 @@ class HomeBannerAdapter :
         private val bannerImageView = view.findViewById<ImageView>(R.id.iv_banner_image)
         private val bannerBadgeTextView = view.findViewById<TextView>(R.id.tv_banner_badge)
         private val bannerTitleTextView = view.findViewById<TextView>(R.id.tv_banner_title)
-        private val bannerDetailThumbImageView =
-            view.findViewById<ImageView>(R.id.iv_banner_thumbnail)
-        private val bannerDetailBrandLabelTextView =
-            view.findViewById<TextView>(R.id.tv_banner_brand_label)
-        private val bannerDetailProductLabelTextView =
-            view.findViewById<TextView>(R.id.tv_banner_detail_product_label)
-        private val bannerDetailDiscountPriceTextView =
-            view.findViewById<TextView>(R.id.tv_banner_detail_product_discount_price)
-        private val bannerDetailDiscountRateTextView =
-            view.findViewById<TextView>(R.id.tv_banner_detail_product_discount_rate)
-        private val bannerDetailPriceTextView =
-            view.findViewById<TextView>(R.id.tv_banner_product_price)
+        private val bannerDetailThumbImageView = view.findViewById<ImageView>(R.id.iv_banner_thumbnail)
+        private val bannerDetailBrandLabelTextView = view.findViewById<TextView>(R.id.tv_banner_brand_label)
+        private val bannerDetailProductLabelTextView = view.findViewById<TextView>(R.id.tv_banner_detail_product_label)
+        private val bannerDetailDiscountPriceTextView = view.findViewById<TextView>(R.id.tv_banner_detail_product_discount_price)
+        private val bannerDetailDiscountRateTextView = view.findViewById<TextView>(R.id.tv_banner_detail_product_discount_rate)
+        private val bannerDetailPriceTextView = view.findViewById<TextView>(R.id.tv_banner_product_price)
 
         fun bind(banner: Banner) {
             loadImage(banner.backgroundImageUrl, bannerImageView)
@@ -89,11 +83,15 @@ class HomeBannerAdapter :
 }
 
 class BannerDiffCallback : DiffUtil.ItemCallback<Banner>() {
+//    - 기존의 객체와 새로운 객체를 비교할때 어떤 식별자를 사용할지 알려줘야 한다.
+//    - productDetail의 productId를 식별자로 지정!
     override fun areItemsTheSame(oldItem: Banner, newItem: Banner): Boolean {
         return oldItem.productDetail.productId == newItem.productDetail.productId
     }
-
+//    - `areItemsTheSame()` 이 동일하다면 호출이 된다.
+//    - 두 객체 자체를 비교해주면 된다.
     override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean {
         return oldItem == newItem
     }
+    // 만약의 나머지 프로퍼티중 일부 중 다른 것을 가지고 있다면 다른 것으로 인식하고, 기존에 그려졌던 UI가 있다면 업데이트 하게 된다.
 }
