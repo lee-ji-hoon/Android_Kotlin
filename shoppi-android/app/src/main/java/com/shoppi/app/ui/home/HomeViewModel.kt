@@ -18,8 +18,8 @@ class HomeViewModel(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
 
-    private val _title = MutableLiveData<Title>()
-    val title: LiveData<Title> = _title
+    private val _title = MutableLiveData<Title>() // 수정은 가능하지만 접근이 불가능하다.
+    val title: LiveData<Title> = _title // 접근은 가능하다.
 
     private val _topBanners = MutableLiveData<List<Banner>>()
     val topBanners: LiveData<List<Banner>> = _topBanners
