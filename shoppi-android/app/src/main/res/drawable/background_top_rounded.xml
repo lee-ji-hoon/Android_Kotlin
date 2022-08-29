@@ -5,6 +5,6 @@
         android:width="1dp"
         android:color="@color/shoppi_black_01_a08" />
     <corners
-        android:topRightRadius="24dp"
-        android:topLeftRadius="24dp" />
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp" />
 </shape>

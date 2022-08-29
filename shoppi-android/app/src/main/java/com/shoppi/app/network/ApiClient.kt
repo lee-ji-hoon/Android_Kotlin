@@ -2,31 +2,32 @@ package com.shoppi.app.network
 
 import com.shoppi.app.model.Category
 import com.shoppi.app.model.CategoryDetail
+import com.shoppi.app.model.Product
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/28
- * @desc
- */
+import retrofit2.http.Path
 
 interface ApiClient {
+
     @GET("categories.json")
     suspend fun getCategories(): List<Category>
 
     @GET("fashion_female.json")
     suspend fun getCategoryDetail(): CategoryDetail
 
+    @GET("products/{productId}.json")
+    suspend fun getProductDetail(@Path("productId") productId: String): Product
+
     companion object {
+
         private const val baseUrl =
             "https://shoppi-e193a-default-rtdb.asia-southeast1.firebasedatabase.app/"
 
         fun create(): ApiClient {
+
             val logger = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BASIC
             }

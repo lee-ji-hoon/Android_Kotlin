@@ -8,6 +8,7 @@
         <variable
             name="title"
             type="com.shoppi.app.model.Title" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -45,7 +46,7 @@
                     android:layout_height="68dp"
                     android:layout_gravity="end"
                     android:layout_marginEnd="4dp"
-                    android:contentDescription="@string/toolbar_logo"
+                    android:contentDescription="@string/description_appbar_home_icon"
                     android:scaleType="center"
                     tools:src="@drawable/ic_gnb_back" />
 
@@ -82,6 +83,17 @@
                     app:tabBackground="@drawable/selector_viewpager_indicator"
                     app:tabGravity="center"
                     app:tabIndicatorHeight="0dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_home"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewpager_home_banner_indicator" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

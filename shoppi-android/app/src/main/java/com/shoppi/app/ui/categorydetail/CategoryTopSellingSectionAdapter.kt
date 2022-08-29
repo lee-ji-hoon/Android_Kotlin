@@ -5,18 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shoppi.app.databinding.ItemCategoryTopSellingBinding
 import com.shoppi.app.databinding.ItemCategoryTopSellingSectionBinding
 import com.shoppi.app.model.TopSelling
 
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/29
- * @desc
- */
-
-class CategoryTopSellingSectionAdapter : ListAdapter<TopSelling, CategoryTopSellingSectionAdapter.TopSellingSectionViewHolder>(TopSellingDiffCallback()) {
+class CategoryTopSellingSectionAdapter: ListAdapter<TopSelling, CategoryTopSellingSectionAdapter.TopSellingSectionViewHolder>(TopSellingDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopSellingSectionViewHolder {
         val binding = ItemCategoryTopSellingSectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,10 +19,10 @@ class CategoryTopSellingSectionAdapter : ListAdapter<TopSelling, CategoryTopSell
         holder.bind(getItem(position))
     }
 
-    class TopSellingSectionViewHolder(
-        private val binding: ItemCategoryTopSellingSectionBinding
-    ): RecyclerView.ViewHolder(binding.root){
+    class TopSellingSectionViewHolder(private val binding: ItemCategoryTopSellingSectionBinding) : RecyclerView.ViewHolder(binding.root) {
+
         private val nestedAdapter = CategoryTopSellingItemAdapter()
+
         init {
             binding.rvCategorySection.adapter = nestedAdapter
         }
@@ -43,7 +35,7 @@ class CategoryTopSellingSectionAdapter : ListAdapter<TopSelling, CategoryTopSell
     }
 }
 
-class TopSellingDiffCallback: DiffUtil.ItemCallback<TopSelling>() {
+class TopSellingDiffCallback : DiffUtil.ItemCallback<TopSelling>() {
     override fun areItemsTheSame(oldItem: TopSelling, newItem: TopSelling): Boolean {
         return oldItem.title.text == newItem.title.text
     }

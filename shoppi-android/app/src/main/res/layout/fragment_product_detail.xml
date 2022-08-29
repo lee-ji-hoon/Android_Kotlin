@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/shoppi_white"
-            android:elevation="0dp">
+            app:elevation="0dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_product_detail"
@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:navigationIcon="@drawable/ic_gnb_back" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -44,8 +45,8 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:contentDescription="@string/description_product_detail_thumbnail"
-                    android:src="@drawable/img_pdp_top_01"
+                    android:contentDescription="@string/description_product_thumbnail"
+                    android:scaleType="centerCrop"
                     app:layout_constraintDimensionRatio="w, 1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +79,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_product_brand_name"
-                    tools:text="[19차 리오더] 페이크 레더 숏 테일러 자켓 블랙(1color)" />
+                    tools:text="[19차 리오더] 페이크 레더 숏 테일러 자켓 블랙(1 color)" />
 
                 <TextView
                     android:id="@+id/tv_product_discount_rate"
@@ -87,27 +88,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
-                    android:text="@{product.discountRate}"
+                    android:text="@{@string/unit_discount_rate(product.discountRate)}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_product_label"
                     tools:text="10%" />
 
                 <TextView
                     android:id="@+id/tv_product_discount_price"
-                    style="@style/TextMedium"
+                    style="@style/TextMedium.Bold"
+                    discountRate="@{product.discountRate}"
+                    priceAmount="@{product.price}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@{@string/unit_discount_rate(product.discountRate)}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_product_discount_rate"
                     app:layout_constraintStart_toEndOf="@id/tv_product_discount_rate"
                     app:layout_constraintTop_toTopOf="@id/tv_product_discount_rate"
-                    tools:text="99,000원" />
+                    tools:text="99,800원" />
 
                 <TextView
                     android:id="@+id/tv_product_price"
                     style="@style/TextSubtitle2.Grey05"
-                    discountRate="@{product.discountRate}"
+                    priceAmount="@{product.price}"
                     strikeThrough="@{true}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,13 +165,13 @@
             android:background="@drawable/background_top_rounded">
 
             <TextView
-                android:id="@+id/rv_product_discount_price_label"
+                android:id="@+id/tv_product_discount_price_label"
                 style="@style/TextCaption2.Grey04"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/description_product_coupon"
+                android:text="@string/label_product_price_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,8 +181,8 @@
                 priceAmount="@{product.price}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/rv_product_discount_price_label"
-                app:layout_constraintTop_toBottomOf="@id/rv_product_discount_price_label"
+                app:layout_constraintStart_toStartOf="@id/tv_product_discount_price_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_discount_price_label"
                 tools:text="120,000원" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -191,11 +193,10 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/background_gradient_r24"
-                android:text="@string/description_cart"
+                android:text="@string/label_add_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,51 +1,42 @@
 package com.shoppi.app.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.shoppi.app.model.Banner
-import com.shoppi.app.model.Category
+import com.shoppi.app.model.Promotion
 import com.shoppi.app.model.Title
 import com.shoppi.app.repository.home.HomeRepository
 import com.shoppi.app.ui.common.Event
-import kotlinx.coroutines.launch
 
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/28
- * @desc
- */
+class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
-class HomeViewModel(
-    private val homeRepository: HomeRepository
-) : ViewModel() {
-
-    private val _title = MutableLiveData<Title>() // 수정은 가능하지만 접근이 불가능하다.
-    val title: LiveData<Title> = _title // 접근은 가능하다.
+    private val _title = MutableLiveData<Title>()
+    val title: LiveData<Title> = _title
 
     private val _topBanners = MutableLiveData<List<Banner>>()
     val topBanners: LiveData<List<Banner>> = _topBanners
 
-    private val _openBannerEvent = MutableLiveData<Event<String>>()
-    val openBannerEvent: LiveData<Event<String>> = _openBannerEvent
+    private val _promotions = MutableLiveData<Promotion>()
+    val promotions: LiveData<Promotion> = _promotions
+
+    private val _openProductEvent = MutableLiveData<Event<String>>()
+    val openProductEvent: LiveData<Event<String>> = _openProductEvent
 
     init {
         loadHomeData()
     }
 
-    private fun loadHomeData() {
-        viewModelScope.launch {
-            val homeData = homeRepository.getHomeData()
-            homeData?.let { homeData ->
-                _title.value = homeData.title
-                _topBanners.value = homeData.topBanners
-            }
-        }
+    fun openProductDetail(productId: String) {
+        _openProductEvent.value = Event(productId)
     }
-    fun openProductDetail(productId: String){
-        _openBannerEvent.value = Event(productId)
+
+    private fun loadHomeData() {
+        val homeData = homeRepository.getHomeData()
+        homeData?.let { homeData ->
+            _title.value = homeData.title
+            _topBanners.value = homeData.topBanners
+            _promotions.value = homeData.promotions
+        }
     }
 }

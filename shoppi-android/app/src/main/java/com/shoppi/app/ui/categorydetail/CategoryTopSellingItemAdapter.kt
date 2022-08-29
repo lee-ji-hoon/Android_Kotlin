@@ -8,19 +8,17 @@ import com.shoppi.app.databinding.ItemCategoryTopSellingBinding
 import com.shoppi.app.model.Category
 import com.shoppi.app.ui.common.CategoryDiffCallback
 
+class CategoryTopSellingItemAdapter :
+    ListAdapter<Category, CategoryTopSellingItemAdapter.TopSellingItemViewHolder>(
+        CategoryDiffCallback()
+    ) {
 
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/29
- * @desc
- */
-
-class CategoryTopSellingItemAdapter : ListAdapter<Category, CategoryTopSellingItemAdapter.TopSellingItemViewHolder>(
-    CategoryDiffCallback()
-) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopSellingItemViewHolder {
-        val binding = ItemCategoryTopSellingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemCategoryTopSellingBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return TopSellingItemViewHolder(binding)
     }
 
@@ -28,13 +26,12 @@ class CategoryTopSellingItemAdapter : ListAdapter<Category, CategoryTopSellingIt
         holder.bind(getItem(position))
     }
 
-    class TopSellingItemViewHolder(
-        private val binding: ItemCategoryTopSellingBinding
-    ): RecyclerView.ViewHolder(binding.root){
+    class TopSellingItemViewHolder(private val binding: ItemCategoryTopSellingBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(category: Category) {
             binding.category = category
             binding.executePendingBindings()
         }
     }
 }
-

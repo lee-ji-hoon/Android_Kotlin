@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="@{() -> viewModel.openProductDetail(banner.productDetail.productId)}">
+        android:onClick="@{()->viewModel.openProductDetail(banner.productDetail.productId)}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_banner_image"
@@ -25,6 +25,7 @@
             android:layout_width="312dp"
             android:layout_height="343dp"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/description_home_banner_image"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,8 +37,7 @@
             android:background="@drawable/background_black_gradient"
             app:layout_constraintBottom_toBottomOf="@id/iv_banner_image"
             app:layout_constraintEnd_toEndOf="@id/iv_banner_image"
-            app:layout_constraintStart_toStartOf="@id/iv_banner_image"
-            />
+            app:layout_constraintStart_toStartOf="@id/iv_banner_image" />
 
         <TextView
             android:id="@+id/tv_banner_badge"
@@ -53,14 +53,14 @@
             android:paddingBottom="1dp"
             android:text="@{banner.badge.label}"
             android:textColor="@color/shoppi_white"
-            app:layout_constraintBottom_toTopOf="@+id/tv_banner_title"
+            app:layout_constraintBottom_toTopOf="@id/tv_banner_title"
             app:layout_constraintStart_toStartOf="@id/iv_banner_image"
             tools:background="@color/shoppi_grey_02"
             tools:text="기획전" />
 
         <TextView
             android:id="@+id/tv_banner_title"
-            style="@style/TextHeadLine32.White.Bold"
+            style="@style/TextHeadline32.White.Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -75,7 +75,7 @@
 
         <View
             android:id="@+id/bg_banner_product_detail"
-            android:layout_width="288dp"
+            android:layout_width="0dp"
             android:layout_height="85dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
@@ -83,22 +83,22 @@
             android:background="@drawable/background_white"
             app:layout_constraintBottom_toBottomOf="@id/iv_banner_image"
             app:layout_constraintEnd_toEndOf="@id/iv_banner_image"
-            app:layout_constraintStart_toStartOf="@+id/iv_banner_image" />
+            app:layout_constraintStart_toStartOf="@id/iv_banner_image" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_banner_thumbnail"
+            android:id="@+id/iv_banner_detail_thumbnail"
             imageUrl="@{banner.productDetail.thumbnailImageUrl}"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_home_banner_thumbnail"
             app:layout_constraintStart_toStartOf="@id/bg_banner_product_detail"
             app:layout_constraintTop_toTopOf="@id/bg_banner_product_detail"
             app:shapeAppearanceOverlay="@style/RoundedMedium" />
 
         <TextView
-            android:id="@+id/tv_banner_brand_label"
+            android:id="@+id/tv_banner_detail_brand_label"
             style="@style/TextSubtitle3.Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -109,9 +109,9 @@
             android:maxLines="1"
             android:text="@{banner.productDetail.brandName}"
             app:layout_constraintEnd_toEndOf="@id/bg_banner_product_detail"
-            app:layout_constraintStart_toEndOf="@id/iv_banner_thumbnail"
+            app:layout_constraintStart_toEndOf="@id/iv_banner_detail_thumbnail"
             app:layout_constraintTop_toTopOf="@id/bg_banner_product_detail"
-            tools:text="twg.official" />
+            tools:text="twg. official" />
 
         <TextView
             android:id="@+id/tv_banner_detail_product_label"
@@ -120,9 +120,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:text="@{banner.productDetail.label}"
-            app:layout_constraintEnd_toEndOf="@id/tv_banner_brand_label"
-            app:layout_constraintStart_toStartOf="@id/tv_banner_brand_label"
-            app:layout_constraintTop_toBottomOf="@id/tv_banner_brand_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_banner_detail_brand_label"
+            app:layout_constraintStart_toStartOf="@id/tv_banner_detail_brand_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_banner_detail_brand_label"
             tools:text="캐시미어 100% 터틀넥 스웨터" />
 
         <TextView
@@ -145,11 +145,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_banner_detail_product_discount_rate"
-            app:layout_constraintStart_toEndOf="@+id/tv_banner_detail_product_discount_rate"
+            app:layout_constraintStart_toEndOf="@id/tv_banner_detail_product_discount_rate"
             tools:text="89,000원" />
 
         <TextView
-            android:id="@+id/tv_banner_product_price"
+            android:id="@+id/tv_banner_detail_product_price"
             style="@style/TextCaption1.Grey05"
             priceAmount="@{banner.productDetail.price}"
             strikeThrough="@{true}"
@@ -157,8 +157,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="1dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_banner_detail_product_discount_rate"
-            app:layout_constraintStart_toEndOf="@+id/tv_banner_detail_product_discount_price"
+            app:layout_constraintBottom_toBottomOf="@id/tv_banner_detail_product_discount_price"
+            app:layout_constraintStart_toEndOf="@id/tv_banner_detail_product_discount_price"
             tools:text="100,000원" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

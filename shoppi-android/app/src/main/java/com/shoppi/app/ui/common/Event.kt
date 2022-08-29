@@ -3,15 +3,11 @@ package com.shoppi.app.ui.common
 import androidx.lifecycle.Observer
 
 /**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/29
- * @desc
+ * reference link
+ * https://github.com/android/architecture-samples/blob/main/app/src/main/java/com/example/android/architecture/blueprints/todoapp/Event.kt
  */
+class Event<T>(private val content: T) {
 
-class Event<T>(
-    private val content: T
-) {
     private var hasBeenHandled = false
 
     fun getContentIfNotHandled(): T? {
@@ -24,12 +20,10 @@ class Event<T>(
     }
 }
 
-class EventObserver<T>(
-    private val onEventUnHandledContent: (T) -> Unit
-) : Observer<Event<T>> {
+class EventObserver<T>(private val onEventUnhandledContent: (T) -> Unit) : Observer<Event<T>> {
     override fun onChanged(event: Event<T>?) {
         event?.getContentIfNotHandled()?.let {
-            onEventUnHandledContent(it)
+            onEventUnhandledContent(it)
         }
     }
 }

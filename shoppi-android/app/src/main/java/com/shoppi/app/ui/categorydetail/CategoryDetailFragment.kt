@@ -7,20 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
-import com.shoppi.app.common.KEY_CATEGORY_ID
 import com.shoppi.app.common.KEY_CATEGORY_LABEL
-import com.shoppi.app.databinding.FragmentCategoryBinding
 import com.shoppi.app.databinding.FragmentCategoryDetailBinding
+import com.shoppi.app.ui.common.ProductClickListener
+import com.shoppi.app.ui.common.ProductPromotionAdapter
+import com.shoppi.app.ui.common.SectionTitleAdapter
 import com.shoppi.app.ui.common.ViewModelFactory
 
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/29
- * @desc
- */
+class CategoryDetailFragment: Fragment(), ProductClickListener {
 
-class CategoryDetailFragment : Fragment() {
     private lateinit var binding: FragmentCategoryDetailBinding
     private val viewModel: CategoryDetailViewModel by viewModels { ViewModelFactory(requireContext()) }
 
@@ -28,16 +23,22 @@ class CategoryDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentCategoryDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.lifecycleOwner = viewLifecycleOwner
         setToolbar()
         setListAdapter()
+    }
+
+    // ProductClickListener
+    override fun onProductClick(productId: String) {
+        // TODO 화면 이동 구현
     }
 
     private fun setToolbar() {
@@ -47,19 +48,15 @@ class CategoryDetailFragment : Fragment() {
 
     private fun setListAdapter() {
         val topSellingSectionAdapter = CategoryTopSellingSectionAdapter()
-        val titleAdapter = CategorySectionTitleAdapter()
-        val promotionAdapter = CategoryPromotionAdapter()
-        binding.rvCategoryDetail.adapter =
-            ConcatAdapter(topSellingSectionAdapter, titleAdapter, promotionAdapter)
-
+        val titleAdapter = SectionTitleAdapter()
+        val promotionAdapter = ProductPromotionAdapter(this)
+        binding.rvCategoryDetail.adapter = ConcatAdapter(topSellingSectionAdapter, titleAdapter, promotionAdapter)
         viewModel.topSelling.observe(viewLifecycleOwner) { topSelling ->
             topSellingSectionAdapter.submitList(listOf(topSelling))
         }
-
-        viewModel.promotion.observe(viewLifecycleOwner) { promotion ->
-            titleAdapter.submitList(listOf(promotion.title))
-            promotionAdapter.submitList(promotion.items)
+        viewModel.promotions.observe(viewLifecycleOwner) { promotions ->
+            titleAdapter.submitList(listOf(promotions.title))
+            promotionAdapter.submitList(promotions.items)
         }
     }
-
 }

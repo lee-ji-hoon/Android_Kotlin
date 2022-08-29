@@ -13,11 +13,11 @@
     </item>
     <item
         android:bottom="1.5dp"
-        android:end="1.5dp"
-        android:start="1.5dp"
+        android:left="1.5dp"
+        android:right="1.5dp"
         android:top="1.5dp">
         <shape android:shape="oval">
-            <solid android:color="@color/shoppi_white"/>
+            <solid android:color="@color/shoppi_white" />
         </shape>
     </item>
 </layer-list>

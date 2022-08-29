@@ -2,30 +2,23 @@ package com.shoppi.app.ui.common
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/28
- * @desc
- */
+import com.shoppi.app.GlideApp
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, imageUrl: String?) {
-    imageUrl?.let {
-        Glide.with(view)
-            .load(it)
+    if (!imageUrl.isNullOrEmpty()) {
+        GlideApp.with(view)
+            .load(imageUrl)
             .into(view)
     }
 }
 
 @BindingAdapter("circleImageUrl")
 fun loadCircleImage(view: ImageView, imageUrl: String?) {
-    imageUrl?.let {
-        Glide.with(view)
-            .load(it)
-            .circleCrop() // 원형 렌더링
+    if (!imageUrl.isNullOrEmpty()) {
+        GlideApp.with(view)
+            .load(imageUrl)
+            .circleCrop()
             .into(view)
     }
 }

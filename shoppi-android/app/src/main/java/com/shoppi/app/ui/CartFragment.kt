@@ -7,14 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.shoppi.app.R
 
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/27
- * @desc
- */
-
-class CartFragment : Fragment() {
+class CartFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

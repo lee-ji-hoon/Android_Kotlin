@@ -1,22 +1,11 @@
 package com.shoppi.app.ui.common
 
 import android.graphics.Paint
-import android.text.SpannableString
-import android.text.style.StrikethroughSpan
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.shoppi.app.R
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
-
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/28
- * @desc
- */
-
-private val decimalFormat = DecimalFormat("#,###")
 
 @BindingAdapter("priceAmount")
 fun applyPriceFormat(view: TextView, price: Int) {
@@ -31,7 +20,7 @@ fun applyPriceDiscountRate(view: TextView, price: Int, discountRate: Int) {
 }
 
 @BindingAdapter("priceAmount", "strikeThrough")
-fun applyPriceAndStrikeStyle(view: TextView, price: Int, strikeThrough: Boolean){
+fun applyPriceAndStrikeStyle(view: TextView, price: Int, strikeThrough: Boolean) {
     applyPriceFormat(view, price)
     if (strikeThrough) {
         view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG

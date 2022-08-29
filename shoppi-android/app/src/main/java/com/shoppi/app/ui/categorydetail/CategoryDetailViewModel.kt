@@ -9,21 +9,15 @@ import com.shoppi.app.model.TopSelling
 import com.shoppi.app.repository.categorydetail.CategoryDetailRepository
 import kotlinx.coroutines.launch
 
-/**
- * @author jihoon
- * @email dlwlgns1240@gmail.com
- * @created 2022/08/29
- * @desc
- */
-
 class CategoryDetailViewModel(
     private val categoryDetailRepository: CategoryDetailRepository
-) : ViewModel() {
+): ViewModel() {
+
     private val _topSelling = MutableLiveData<TopSelling>()
-    var topSelling: LiveData<TopSelling> = _topSelling
+    val topSelling: LiveData<TopSelling> = _topSelling
 
     private val _promotions = MutableLiveData<Promotion>()
-    var promotion: LiveData<Promotion> = _promotions
+    val promotions: LiveData<Promotion> = _promotions
 
     init {
         loadCategoryDetail()
