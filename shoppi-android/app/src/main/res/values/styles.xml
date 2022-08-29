@@ -6,6 +6,18 @@
     </style>
 
     <!--  Text Style  -->
+    <style name="TextHeadLine32">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextHeadLine32.White">
+        <item name="android:textColor">@color/shoppi_white</item>
+    </style>
+
+    <style name="TextHeadLine32.White.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextHeadline5.Black02" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textColor">@color/shoppi_black_02</item>
     </style>
@@ -76,6 +88,10 @@
         <item name="android:textColor">@color/shoppi_black_01</item>
     </style>
 
+    <style name="TextSubtitle3.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextSubtitle3.Grey03">
         <item name="android:textColor">@color/shoppi_grey_03</item>
     </style>
@@ -90,6 +106,10 @@
 
     <style name="TextCaption1.Grey05" >
         <item name="android:textColor">@color/shoppi_grey_05</item>
+    </style>
+
+    <style name="TextCaption1.White" >
+        <item name="android:textColor">@color/shoppi_white</item>
     </style>
 
     <style name="TextCaption2" parent="TextAppearance.AppCompat.Caption">
