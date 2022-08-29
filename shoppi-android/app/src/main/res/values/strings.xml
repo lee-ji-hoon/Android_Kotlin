@@ -12,4 +12,5 @@
     <string name="label_home_icon">홈</string>
     <string name="label_cart_icon">장바구니</string>
     <string name="toolbar_logo">로고이미지</string>
+    <string name="label_category_new">NEW</string>
 </resources>
