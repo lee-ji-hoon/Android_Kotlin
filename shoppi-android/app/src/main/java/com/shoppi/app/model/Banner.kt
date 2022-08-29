@@ -1,4 +1,4 @@
-package com.shoppi.app
+package com.shoppi.app.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -23,3 +23,4 @@ data class Product(
     @SerializedName("representative_image_url") val representativeImageUrl: String?,
     @SerializedName("product_id") val productId: String
 )
+
