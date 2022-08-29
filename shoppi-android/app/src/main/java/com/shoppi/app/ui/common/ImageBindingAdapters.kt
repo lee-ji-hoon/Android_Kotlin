@@ -19,3 +19,13 @@ fun loadImage(view: ImageView, imageUrl: String?) {
             .into(view)
     }
 }
+
+@BindingAdapter("circleImageUrl")
+fun loadCircleImage(view: ImageView, imageUrl: String?) {
+    imageUrl?.let {
+        Glide.with(view)
+            .load(it)
+            .circleCrop() // 원형 렌더링
+            .into(view)
+    }
+}
