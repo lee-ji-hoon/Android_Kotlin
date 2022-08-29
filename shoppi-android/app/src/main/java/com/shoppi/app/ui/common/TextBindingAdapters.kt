@@ -1,5 +1,7 @@
 package com.shoppi.app.ui.common
 
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.shoppi.app.R
@@ -13,14 +15,25 @@ import kotlin.math.roundToInt
  * @desc
  */
 
+private val decimalFormat = DecimalFormat("#,###")
+
 @BindingAdapter("priceAmount")
 fun applyPriceFormat(view: TextView, price: Int) {
-    val decimalFormat = DecimalFormat("#,###")
-    view.text = view.context.getString(R.string.unit_discount_currency, decimalFormat.format(price))
+    val spannablePrice = SpannableString(
+        view.context.getString(
+            R.string.unit_discount_currency,
+            decimalFormat.format(price)
+        )
+    )
+    spannablePrice.setSpan(StrikethroughSpan(), 0, spannablePrice.length, 0)
+    view.text = spannablePrice
 }
 
 @BindingAdapter("priceAmount", "discountRate")
 fun applyPriceDiscountRate(view: TextView, price: Int, discountRate: Int) {
     val discountPrice = (((100 - discountRate) / 100.0) * price).roundToInt()
-    applyPriceFormat(view, discountPrice)
+    view.text = view.context.getString(
+        R.string.unit_discount_currency,
+        decimalFormat.format(discountPrice)
+    )
 }
