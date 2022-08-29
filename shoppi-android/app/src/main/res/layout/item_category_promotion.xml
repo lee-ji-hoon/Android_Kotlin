@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="12dp">
 
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="15dp"
-                android:text="@{@string/unitdiscount_rate(product.discountRate)}"
+                android:text="@{@string/unit_discount_rate(product.discountRate)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_promotion_image"
                 tools:text="10%" />
@@ -55,7 +55,7 @@
                 android:layout_marginStart="6dp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_promotion_discount_rate"
                 app:layout_constraintStart_toEndOf="@id/tv_promotion_discount_rate"
-                tools:text="99,000원" />
+                tools:text="99,800원" />
 
             <TextView
                 android:id="@+id/tv_promotion_original_price"
@@ -64,19 +64,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/tv_promotion_discount_rate"
+                app:layout_constraintBottom_toBottomOf="@id/tv_promotion_price"
                 app:layout_constraintStart_toEndOf="@id/tv_promotion_price"
-                tools:text="102,000원" />
+                tools:text="120,000원" />
 
             <TextView
                 android:id="@+id/tv_promotion_label"
                 style="@style/TextSubtitle2"
                 android:layout_width="0dp"
-                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:maxLines="1"
                 android:text="@{product.label}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
