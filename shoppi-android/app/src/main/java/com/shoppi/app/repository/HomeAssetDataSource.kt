@@ -1,4 +1,4 @@
-package com.shoppi.app.repository.home
+package com.shoppi.app.repository
 
 import com.google.gson.Gson
 import com.shoppi.app.AssetLoader
@@ -15,7 +15,7 @@ class HomeAssetDataSource(
     private val assetLoader: AssetLoader
 ) : HomeDataSource {
     private val gson = Gson()
-    override suspend fun getHomeData(): HomeData? {
+    override fun getHomeData(): HomeData? {
         return assetLoader.getJsonString("home.json")?.let { homeJsonString ->
             gson.fromJson(homeJsonString, HomeData::class.java)
         }

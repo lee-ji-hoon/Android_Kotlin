@@ -1,5 +1,6 @@
 package com.shoppi.app.ui.common
 
+import android.graphics.Paint
 import android.text.SpannableString
 import android.text.style.StrikethroughSpan
 import android.widget.TextView
@@ -19,21 +20,20 @@ private val decimalFormat = DecimalFormat("#,###")
 
 @BindingAdapter("priceAmount")
 fun applyPriceFormat(view: TextView, price: Int) {
-    val spannablePrice = SpannableString(
-        view.context.getString(
-            R.string.unit_discount_currency,
-            decimalFormat.format(price)
-        )
-    )
-    spannablePrice.setSpan(StrikethroughSpan(), 0, spannablePrice.length, 0)
-    view.text = spannablePrice
+    val decimalFormat = DecimalFormat("#,###")
+    view.text = view.context.getString(R.string.unit_discount_currency, decimalFormat.format(price))
 }
 
 @BindingAdapter("priceAmount", "discountRate")
 fun applyPriceDiscountRate(view: TextView, price: Int, discountRate: Int) {
     val discountPrice = (((100 - discountRate) / 100.0) * price).roundToInt()
-    view.text = view.context.getString(
-        R.string.unit_discount_currency,
-        decimalFormat.format(discountPrice)
-    )
+    applyPriceFormat(view, discountPrice)
+}
+
+@BindingAdapter("priceAmount", "strikeThrough")
+fun applyPriceAndStrikeStyle(view: TextView, price: Int, strikeThrough: Boolean){
+    applyPriceFormat(view, price)
+    if (strikeThrough) {
+        view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+    }
 }

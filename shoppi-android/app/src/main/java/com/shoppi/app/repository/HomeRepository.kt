@@ -1,4 +1,4 @@
-package com.shoppi.app.repository.home
+package com.shoppi.app.repository
 
 import com.shoppi.app.model.HomeData
 
@@ -12,7 +12,7 @@ import com.shoppi.app.model.HomeData
 class HomeRepository(
     private val assetDataSource: HomeAssetDataSource
 ) {
-    suspend fun getHomeData(): HomeData? {
+    fun getHomeData(): HomeData? {
         return assetDataSource.getHomeData()
     }
 }
