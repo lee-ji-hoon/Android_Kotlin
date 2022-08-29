@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide.init
 import com.shoppi.app.model.Category
 import com.shoppi.app.repository.category.CategoryRepository
+import com.shoppi.app.ui.common.Event
 import kotlinx.coroutines.launch
 
 /**
@@ -22,8 +23,8 @@ class CategoryViewModel(
     private val _items = MutableLiveData<List<Category>>()
     var items: LiveData<List<Category>> = _items
 
-    private val _openCategoryEvent = MutableLiveData<Category>()
-    var openCategoryEvent: LiveData<Category> = _openCategoryEvent
+    private val _openCategoryEvent = MutableLiveData<Event<Category>>()
+    var openCategoryEvent: LiveData<Event<Category>> = _openCategoryEvent
 
     init {
         loadCategory()
@@ -38,6 +39,6 @@ class CategoryViewModel(
     }
 
     fun openCategoryDetail(category: Category) {
-        _openCategoryEvent.value = category
+        _openCategoryEvent.value = Event(category)
     }
 }
