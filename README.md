@@ -1,8 +1,9 @@
 ## 강의
 |이름|기간|링크|완료여부|
 |---|---|---|---|
-|Udemy - 안드로이드 앱개발 부트캠프(Ivy Bae)|2022.08.17 ~ 진행중|[레포지토리](https://github.com/lee-ji-hoon/android-kotlin/tree/main/shoppi-android) / [강의](https://www.udemy.com/course/learn-android-development-with-kotlin/)|진행중|
+|Udemy - 안드로이드 앱개발 부트캠프(Ivy Bae)|2022.08.17 ~ 2022.09.10|[레포지토리](https://github.com/lee-ji-hoon/android-kotlin/tree/main/shoppi-android) / [강의](https://www.udemy.com/course/learn-android-development-with-kotlin/)|완료|
 |Youtube - 안드로이드 기초 강좌(테크과학! DiMo) |2022.08.19 ~ 2022.08.20|[레포지토리](https://github.com/lee-ji-hoon/android-kotlin/tree/main/dimo-android-begins) / [강의](https://www.youtube.com/watch?v=KyDrT8mEEFY&ab_channel=%ED%85%8C%ED%81%AC%EA%B3%BC%ED%95%99%21DiMo)|**완료**|
+|Udemy - To-Do App & Clean Architecture|2022.09.13 ~ 진행중|[레포지토리](https://github.com/lee-ji-hoon/android-kotlin/tree/main/todo) / [강의](https://www.udemy.com/course/to-do-app-clean-architecture-android-development-kotlin/learn/lecture/20748334#questions)|진행중|
 
 ## 서적
 |이름|기간|링크|완료여부|
