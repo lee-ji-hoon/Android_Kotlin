@@ -1,18 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="activity"
+            type="com.guide.room_with_view.MainActivity" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="vmUser"
+            type="com.guide.room_with_view.UserViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/view_divider_top"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:background="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_top_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{vmUser.name, default="default"}'
+            app:layout_constraintBottom_toBottomOf="@id/view_divider_top"
+            app:layout_constraintEnd_toEndOf="@id/view_divider_top"
+            app:layout_constraintStart_toStartOf="@id/view_divider_top"
+            app:layout_constraintTop_toTopOf="@id/view_divider_top"
+            tools:text="이름" />
+
+        <TextView
+            android:id="@+id/tv_top_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{String.valueOf(vmUser.age), default=0}"
+            app:layout_constraintEnd_toEndOf="@id/view_divider_top"
+            app:layout_constraintStart_toStartOf="@id/view_divider_top"
+            app:layout_constraintTop_toBottomOf="@id/tv_top_name"
+            tools:text="나이" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_button_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:onClick="@{() -> vmUser.minus() }"
+            app:layout_constraintEnd_toStartOf="@id/action_button_minus"
+            app:layout_constraintStart_toStartOf="@id/view_divider_top"
+            app:layout_constraintTop_toBottomOf="@id/tv_top_age" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_button_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:onClick="@{() -> vmUser.plus() }"
+            app:layout_constraintEnd_toEndOf="@id/view_divider_top"
+            app:layout_constraintStart_toEndOf="@id/action_button_plus"
+            app:layout_constraintTop_toBottomOf="@id/tv_top_age" />
+
+        <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:background="@color/purple_200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_divider_top"
+            tools:layout="@layout/fragment_blank" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
