@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.guide.room_with_view.databinding.FragmentBlankBinding
 
@@ -18,6 +19,7 @@ import com.guide.room_with_view.databinding.FragmentBlankBinding
 
 class BlankFragment : Fragment() {
     private lateinit var binding: FragmentBlankBinding
+    private val viewModel: UserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +32,7 @@ class BlankFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vmUser = ViewModelProvider(requireActivity())[UserViewModel::class.java]
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
+        binding.vmUser = viewModel
     }
 }

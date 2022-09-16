@@ -1,5 +1,7 @@
 package com.guide.room_with_view
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -16,10 +18,12 @@ class UserViewModel(name: String = "", age: Int = 0) : ViewModel() {
     var age: MutableLiveData<Int> = MutableLiveData(age)
 
     fun minus() {
+        Log.d("TAG", "$name | $age")
         age.value = age.value!! - 1
     }
 
     fun plus() {
+        Log.d("TAG", "$name | $age")
         age.value = age.value!! + 1
     }
 }

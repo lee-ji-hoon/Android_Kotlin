@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 // Factory 생성인자로 name, age Param을 받아서 ViewModel 생성인자로 넘겨 초기값 설정이 가능
 class UserViewModelFactory(var name: String, var age: Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
-        // 생성하려는 ViewModel 클래스 검사
         if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
             UserViewModel(name, age) as T    // ViewModel 인스턴스 생성, create() 제네릭타입에 맞춰 T로 retrun
         } else {
