@@ -17,8 +17,8 @@ class RectangleDrawingCanvas(
     context: Context,
     attrs: AttributeSet? = null
 ) : View(context, attrs) {
-    private var currentBox: Rectangle? = null
-    private var boxen = mutableListOf<Rectangle>()
+    private var currentRectangle: Rectangle? = null
+    private var rectangles = mutableListOf<Rectangle>()
     private val drawingPaint = Paint().apply {
         color = Color.RED
         alpha = 25
@@ -32,21 +32,21 @@ class RectangleDrawingCanvas(
         val currentPoint = PointF(event.x, event.y)
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                currentBox = Rectangle(currentPoint).also { boxen.add(it) }
+                currentRectangle = Rectangle(currentPoint).also { rectangles.add(it) }
             }
             MotionEvent.ACTION_MOVE -> {
                 updateCurrentBox(currentPoint, false)
             }
             MotionEvent.ACTION_UP -> {
                 updateCurrentBox(currentPoint, true)
-                currentBox = null
+                currentRectangle = null
             }
         }
         return true
     }
 
     private fun updateCurrentBox(current: PointF, endDrawing: Boolean) {
-        currentBox?.let {
+        currentRectangle?.let {
             it.end = current
             if (endDrawing) {
                 it.state = Rectangle.STATE.END
@@ -56,7 +56,7 @@ class RectangleDrawingCanvas(
     }
 
     override fun onDraw(canvas: Canvas) {
-        boxen.forEach { box ->
+        rectangles.forEach { box ->
             if (box.state == Rectangle.STATE.END) canvas.drawRect(box.left, box.top, box.right, box.bottom, endPaint)
             else canvas.drawRect(box.left, box.top, box.right, box.bottom, drawingPaint)
         }
